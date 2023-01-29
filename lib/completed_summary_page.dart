@@ -12,10 +12,12 @@
 ///
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:parsnip/database_test/database_test.dart';
 
 class SummaryView extends StatefulWidget {
-  const SummaryView({Key? key}) : super(key: key);
+  const SummaryView({Key? key, required this.selectedSummary}) : super(key: key);
 
+  final summaryData selectedSummary;
 
   @override
   State<SummaryView> createState() => _SummaryViewState();

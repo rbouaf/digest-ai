@@ -1,37 +1,32 @@
-import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:tesseract_ocr/tesseract_ocr.dart';
 import 'dart:io';
+import 'package:flutter/material.dart';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
+import 'package:path_provider/path_provider.dart';
 
-class OCRDoer extends StatefulWidget {
-  final File image;
-  OCRDoer({required Key key, required this.image}) : super(key: key);
+class MyHomePage extends StatefulWidget {
   @override
-  _OCRDoerState createState() => _OCRDoerState();
+  _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _OCRDoerState extends State<OCRDoer> {
+class _MyHomePageState extends State<MyHomePage> {
   String _extractedText = '';
-  late TesseractOcr _tesseractOcr;
-
-  @override
-  void initState() {
-    super.initState();
-    _initTesseract();
-    _extractText();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('OCRDoer'),
+        title: Text('Pick PDF'),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            ElevatedButton(
+            RaisedButton(
+              onPressed: _pickPDF,
+              child: Text('Pick PDF'),
+            ),
+            RaisedButton(
               onPressed: _extractedText.isNotEmpty ? _openPage : null,
               child: Text('Open Page'),
             ),
@@ -41,15 +36,13 @@ class _OCRDoerState extends State<OCRDoer> {
     );
   }
 
-  void _initTesseract() async {
-    var directory = await getApplicationDocumentsDirectory();
-    var path = directory.path + '/tesseract';
-    _tesseractOcr = await TesseractOcr.init(path);
-  }
-
-  void _extractText() async {
-    var text = await _tesseractOcr.extractText(widget.image.path);
-    _extractedText = text;
+  void _pickPDF() async {
+    File file = await FilePicker.getFile();
+    final pdf = pw.Document.openFile(file.path);
+    _extractedText = '';
+    for (var page in pdf.pages) {
+      _extractedText += page.text;
+    }
     setState(() {});
   }
 
@@ -57,7 +50,7 @@ class _OCRDoerState extends State<OCRDoer> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => MyPage(extractedText: _extractedText, key: UniqueKey()),
+        builder: (context) => MyPage(extractedText: _extractedText),
       ),
     );
   }
@@ -66,7 +59,7 @@ class _OCRDoerState extends State<OCRDoer> {
 class MyPage extends StatelessWidget {
   final String extractedText;
 
-  MyPage({required Key key, required this.extractedText}) : super(key: key);
+  MyPage({Key key, @required this.extractedText}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -84,12 +77,12 @@ class MyPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                  extractedText,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                  ),
-                  textAlign: TextAlign.center
+                extractedText,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                ),
+                textAlign: TextAlign.center,
               ),
             ],
           ),
