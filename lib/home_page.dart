@@ -170,10 +170,10 @@ class _HomePageState extends State<HomePage> {
                   summaryData.list.length,
                   (index) => Padding(
                     padding: const EdgeInsets.only(top: 10, bottom: 10),
-                    child: GestureDetector(
+                    child: InkWell(
                       onTap: () {
                         setState(() {
-                          Get.offAll(() => SummaryPage(index));
+                          Get.offAll(() => SummaryPage(index: index,));
                         });
                       },
                       child: Container(

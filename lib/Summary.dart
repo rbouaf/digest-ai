@@ -7,16 +7,14 @@ import 'database_test/database_test.dart';
 
 final titleController = TextEditingController();
 final summaryController = TextEditingController();
-late final int index;
 
 class SummaryPage extends StatelessWidget {
-  SummaryPage(int index, {Key? key, }) : super(key: key);
+  late final int index;
 
-  int get summaryIndex => summaryIndex;
+  SummaryPage({Key? key, required this.index}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    index = summaryIndex;
     titleController.text = summaryData.list[index].title;
     summaryController.text = summaryData.list[index].content;
 
