@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'Login_Page.dart';
 import 'LoginPage.dart';
 import 'UserPage.dart';
+import 'package:parsnip/home_page.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,6 +14,7 @@ Future main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -40,7 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Login_Page(),
+      body: HomePage(),
     );
   }
 }

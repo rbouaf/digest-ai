@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:parsnip/camera_pages/camera_preview_page.dart';
 
-class CameraPage extends StatefulWidget {
-  const CameraPage({Key? key, required this.cameras}) : super(key: key);
+class CameraView extends StatefulWidget {
+  const CameraView({Key? key, required this.cameras}) : super(key: key);
 
   final List<CameraDescription>? cameras;
 
   @override
-  State<CameraPage> createState() => _CameraPageState();
+  State<CameraView> createState() => _CameraViewState();
 }
 
-class _CameraPageState extends State<CameraPage> {
+class _CameraViewState extends State<CameraView> {
   late CameraController _cameraController;
   bool _isRearCameraSelected = true;
 

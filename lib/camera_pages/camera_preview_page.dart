@@ -8,6 +8,10 @@ class PreviewPage extends StatelessWidget {
 
   final XFile picture;
 
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
