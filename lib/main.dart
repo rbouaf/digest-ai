@@ -3,7 +3,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
 import 'AuthController.dart';
 import 'Login_Page.dart';
-import 'LoginPage.dart';
 import 'UserPage.dart';
 import 'Signup_Page.dart';
 import 'Profile.dart';
@@ -33,20 +32,20 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const theHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+class theHomePage extends StatefulWidget {
+  const theHomePage({super.key, required this.title});
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<theHomePage> createState() => _theHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _theHomePageState extends State<theHomePage> {
 
   @override
   Widget build(BuildContext context) {
