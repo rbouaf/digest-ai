@@ -34,7 +34,7 @@ class _LoginPageState extends State<LoginPage> {
     final docUser = FirebaseFirestore.instance.collection('users').doc();
 
 
-    final user = User(
+    final user = UserInfo(
       id: docUser.id,
       name: name,
       age: 20,
@@ -48,13 +48,13 @@ class _LoginPageState extends State<LoginPage> {
   }
 }
 
-class User {
+class UserInfo {
   String id;
   final String name;
   final int age;
   final DateTime birthday;
 
-  User({
+  UserInfo({
     this.id = '',
     required this.name,
     required this.age,

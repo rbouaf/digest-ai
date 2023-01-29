@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:tesseract_ocr/tesseract_ocr.dart';
+import 'package:flutter_tesseract_ocr/flutter_tesseract_ocr.dart';
 import 'dart:io';
 
 class OCRDoer extends StatefulWidget {
@@ -12,7 +12,7 @@ class OCRDoer extends StatefulWidget {
 
 class _OCRDoerState extends State<OCRDoer> {
   String _extractedText = '';
-  late TesseractOcr _tesseractOcr;
+  static late FlutterTesseractOcr _tesseractOcr;
 
   @override
   void initState() {
@@ -44,11 +44,11 @@ class _OCRDoerState extends State<OCRDoer> {
   void _initTesseract() async {
     var directory = await getApplicationDocumentsDirectory();
     var path = directory.path + '/tesseract';
-    _tesseractOcr = await TesseractOcr.init(path);
+    _tesseractOcr = (await FlutterTesseractOcr.extractText(path)) as FlutterTesseractOcr;
   }
 
   void _extractText() async {
-    var text = await _tesseractOcr.extractText(widget.image.path);
+    var text = await FlutterTesseractOcr.extractText(widget.image.path);
     _extractedText = text;
     setState(() {});
   }

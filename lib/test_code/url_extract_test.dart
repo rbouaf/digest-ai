@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class MyPage extends StatelessWidget {
   final String extractedText;
 
-  MyPage({Key key, @required this.extractedText}) : super(key: key);
+  MyPage({required Key key, required this.extractedText}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

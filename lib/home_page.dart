@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
+import 'package:parsnip/AuthController.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart';
 import 'package:flutter/services.dart';
 import 'package:parsnip/pdf_pages/extracted_text_confirmation.dart';
@@ -122,10 +123,7 @@ class _HomePageState extends State<HomePage> {
                   title: const Text(
                       'Logout', style: TextStyle(color: Colors.red)),
                   onTap: () {
-                    // Update the state of the app
-                    // ...
-                    // Then close the drawer
-                    Navigator.pop(context);
+                    AuthController.instance.logOut();
                   },
                 ),
               ],
