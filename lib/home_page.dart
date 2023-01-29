@@ -131,36 +131,38 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Column(children: [
         Padding(
-            padding: EdgeInsets.only(
-              top: 50.0,
-              left: 20.0,
-              right: 20.0,
-              bottom: 20.0,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "disgest.ai",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 40,
-                      fontFamily: 'SF Pro Rounded',
-                      fontWeight: FontWeight.bold),
-                ),
-                //create floatingaction button that when pressed opens the drawer of the scaffold
-                FloatingActionButton(
-                  backgroundColor: Color(0xff1c1d1f),
-                  onPressed: () {
-                    _scaffoldKey.currentState!.openDrawer();
-                  },
-                  child: Icon(Icons.person),
-                ),
-              ],
-            ),),
+          padding: EdgeInsets.only(
+            top: 50.0,
+            left: 20.0,
+            right: 20.0,
+            bottom: 20.0,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "disgest.ai",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 40,
+                    fontFamily: 'SF Pro Rounded',
+                    fontWeight: FontWeight.bold),
+              ),
+              //create floatingaction button that when pressed opens the drawer of the scaffold
+              FloatingActionButton(
+                backgroundColor: Color(0xff1c1d1f),
+                onPressed: () {
+                  _scaffoldKey.currentState!.openDrawer();
+                },
+                child: Icon(Icons.person),
+              ),
+            ],
+          ),
+        ),
         Container(
           padding: EdgeInsets.all(15.0),
           width: double.infinity,
+          height: 600,
           child: LayoutBuilder(builder: (context, constraint) {
             return SingleChildScrollView(
               child: Column(
@@ -171,7 +173,7 @@ class _HomePageState extends State<HomePage> {
                     child: GestureDetector(
                       onTap: () {
                         setState(() {
-                          Get.offAll(() => SummaryPage(index: index));
+                          Get.offAll(() => SummaryPage(index));
                         });
                       },
                       child: Container(
@@ -180,54 +182,37 @@ class _HomePageState extends State<HomePage> {
                           color: Color(0xff2f2f2f),
                         ),
                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
                             Expanded(
-                                flex: 0,
-                                child: Container(
-                                  width: 100,
-                                  height: 100,
-                                  decoration: const BoxDecoration(
-                                    borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(10),
-                                        bottomLeft: Radius.circular(10)),
-                                    image: DecorationImage(
-                                      image: AssetImage(
-                                        'images/signup.png',
-                                      ),
-                                      fit: BoxFit.cover,
+                              flex: 0,
+                              child: Container(
+                                width: 150,
+                                height: 150,
+                                decoration: const BoxDecoration(
+                                  borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(10),
+                                      bottomLeft: Radius.circular(10)),
+                                  image: DecorationImage(
+                                    image: AssetImage(
+                                      'images/signup.png',
                                     ),
+                                    fit: BoxFit.cover,
                                   ),
-                                )),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 30,),
                             Expanded(
                               flex: 2,
-                              child: Row(
-                                children: [
-                                  Column(
-                                    children: [
-                                      Text("Name",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold,
-                                              fontFamily: 'SF Pro Rounded')),
-                                      Text("Description",
-                                          style: TextStyle(
-                                            color: Color.fromRGBO(
-                                                255, 255, 255, 200),
-                                            fontSize: 12,
-                                          )),
-                                      Text("\n"),
-                                    ],
-                                  ),
-                                  ElevatedButton.icon(
-                                      onPressed: () {},
-                                      icon: Icon(Icons.more_vert),
-                                      label: Text(""),
-                                      style: ElevatedButton.styleFrom(
-                                          alignment: Alignment.centerRight,
-                                          backgroundColor:
-                                              Colors.transparent)),
-                                ],
+                              child: Text(
+                                summaryData.list[index].title,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'SF Pro Rounded'),
                               ),
                             )
                           ],
@@ -333,8 +318,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat
-      );
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat);
 
   Future<void> _extractTextFromRangeOfPage(
       PlatformFile file, int start, int end) async {

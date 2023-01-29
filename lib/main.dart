@@ -52,11 +52,10 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: ChatPage(),
+      body: HomePage(),
     );
   }
 }
-
 
 const backgroundColor = Color(0xff343541);
 const botBackgroundColor = Color(0xff444654);

@@ -10,10 +10,16 @@ final summaryController = TextEditingController();
 late final int index;
 
 class SummaryPage extends StatelessWidget {
-  SummaryPage({Key? key, required index}) : super(key: key);
+  SummaryPage(int index, {Key? key, }) : super(key: key);
+
+  int get summaryIndex => summaryIndex;
 
   @override
   Widget build(BuildContext context) {
+    index = summaryIndex;
+    titleController.text = summaryData.list[index].title;
+    summaryController.text = summaryData.list[index].content;
+
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -37,6 +43,7 @@ class SummaryPage extends StatelessWidget {
                 color: Colors.white,
               ),
               child: TextField(
+
                 controller: titleController,
                 decoration: InputDecoration(
                   focusedBorder: OutlineInputBorder(
